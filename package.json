@@ -1,0 +1,32 @@
+{
+  "name": "web_front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun src/index.ts",
+    "build": "rimraf dist && bun build src/index.ts --outdir dist --target bun"
+  },
+  "dependencies": {
+    "zod": "^3.25.42"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cz-commitlint": "^19.8.1",
+    "@sveltejs/adapter-cloudflare": "^7.0.3",
+    "@types/bun": "^1.2.15",
+    "@types/node": "^22.15.29",
+    "commitizen": "^4.3.1",
+    "commitlint": "^19.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
+    "rimraf": "^6.0.1"
+  }
+}

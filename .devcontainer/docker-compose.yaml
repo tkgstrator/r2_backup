@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/home/vscode/app
+    tty: true
+    stdin_open: true
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      BUCKET_NAME: ${BUCKET_NAME}
+      CLOUDFLARE_S3_API: ${CLOUDFLARE_S3_API}
+      CRON_EXPRESSION: ${CRON_EXPRESSION}
+      TARGET_DIR: ${TARGET_DIR}
