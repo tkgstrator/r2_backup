@@ -1,0 +1,20 @@
+aws:
+  access_key_id: ${ACCESS_KEY_ID}
+  secret_access_key: ${SECRET_ACCESS_KEY}
+cf:
+  account_id: ${CLOUDFLARE_ACCOUNT_ID}
+db:
+  host: ${POSTGRES_HOST}
+  user: ${POSTGRES_USER}
+  password: ${POSTGRES_PASSWORD}
+  databases:
+    - name: db1
+      bucket_name: pg-backup
+      retention_period: 3
+      retention_unit: minute
+      cron_expression: "*/1 * * * *"
+    # - name: db2
+    #   bucket_name: pg-backup
+    #   retention_period: 5
+    #   retention_unit: minute
+    #   cron_expression: "*/1 * * * *"
