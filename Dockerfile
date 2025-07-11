@@ -1,4 +1,5 @@
-FROM oven/bun:1.2.18 AS build
+ARG BUN_VERSION=1.2.18
+FROM oven/bun:${BUN_VERSION} AS build
 
 WORKDIR /app
 COPY src /app/src
@@ -6,7 +7,7 @@ COPY package.json /app/package.json
 RUN bun install --frozen-lockfile --ignore-scripts
 RUN bun run build
 
-FROM oven/bun:1.2.18-slim
+FROM oven/bun:${BUN_VERSION}-slim
 RUN \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   --mount=type=cache,target=/var/cache/apt,sharing=locked \
