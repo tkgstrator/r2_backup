@@ -1,0 +1,45 @@
+name: Bump Major Version on PR Open to Master
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  bump-major:
+    if: github.event.pull_request.head.ref == 'develop'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23.11.0
+
+      - name: Bump major version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          NEW_MAJOR=$((MAJOR + 1))
+
+          NEW_VERSION="${NEW_MAJOR}.0.0"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+          jq --arg v "$NEW_VERSION" '.version = $v' package.json > tmp && mv tmp package.json
+
+      - name: Commit major version bump to develop
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add package.json
+          git commit -m "chore: bump major version to ${{ env.NEW_VERSION }}"
+          git push origin develop
