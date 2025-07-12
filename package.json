@@ -26,7 +26,6 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/cz-commitlint": "^19.8.1",
-    "@sveltejs/adapter-cloudflare": "^7.0.5",
     "@types/bun": "^1.2.18",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.13",
