@@ -29,6 +29,8 @@ PGADMIN_DEFAULT_PASSWORD=password
 
 ここに設定されている`POSTGRES_DB`のデータベースが初期化時に作成されます
 
+pgadminが起動するようにしているので[localhost:8080](http://localhost:8080)にアクセスしてダミーデータをいれたり、データベースを作成したりできます
+
 ## Get Started
 
 `.r2bk.yaml`を作成します
@@ -60,7 +62,6 @@ db:
 `cron_expression`は正しく評価できるcron式であれば何でも構いません
 
 `@daily`などのような式も、多分正しく評価されます
-
 
 `compose.yaml`を次のような感じで作成します
 
