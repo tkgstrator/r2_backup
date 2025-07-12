@@ -7,7 +7,7 @@ import {
   PutObjectCommand,
   S3Client
 } from '@aws-sdk/client-s3'
-import dayjs from 'dayjs'
+import dayjs, { type Dayjs } from 'dayjs'
 import cron from 'node-cron'
 import { config, type Database } from './configure'
 
@@ -38,8 +38,7 @@ const backup = async (database: Database): Promise<void> => {
   })
 }
 
-const upload = async (database: Database): Promise<void> => {
-  const current_time = dayjs().startOf('minute')
+const upload = async (database: Database, current_time: Dayjs): Promise<void> => {
   const content = readFileSync(`${database.name}.sql`)
   await client.send(
     new PutObjectCommand({
@@ -101,8 +100,10 @@ console.info('R2 Backup: Scheduled Task Started')
 for (const database of config.db.databases) {
   cron.schedule(database.cron_expression, async () => {
     try {
+      // Ensure the database name is valid for file operations
+      const current_time = dayjs().startOf('minute')
       await backup(database)
-      await upload(database)
+      await upload(database, current_time)
       await remove(database)
     } catch (error) {
       console.error(`Error processing database ${database.name}:`, error)
