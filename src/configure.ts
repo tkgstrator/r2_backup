@@ -4,21 +4,13 @@ import cron from 'cron-validator'
 import yaml from 'js-yaml'
 import { z } from 'zod'
 
-export const DatabaseSchema = z
-  .object({
-    name: z.string().nonempty(),
-    bucket_name: z.string().nonempty(),
-    backup_frequency: z.enum(['daily', 'weekly', 'monthly']).optional(),
-    cron_expression: z
-      .string()
-      .refine((v) => cron.isValidCron(v), { message: 'Invalid cron expression' })
-      .optional(),
-    retention_period: z.number().int().positive(),
-    retention_unit: z.enum(['minute', 'hour', 'day', 'week', 'month'])
-  })
-  .refine((v) => v.backup_frequency !== undefined || v.cron_expression !== undefined, {
-    message: 'backup_frequency or cron_expression must be defined'
-  })
+export const DatabaseSchema = z.object({
+  name: z.string().nonempty(),
+  bucket_name: z.string().nonempty(),
+  cron_expression: z.string().refine((v) => cron.isValidCron(v), { message: 'Invalid cron expression' }),
+  retention_period: z.number().int().positive(),
+  retention_unit: z.enum(['minute', 'hour', 'day', 'week', 'month'])
+})
 export type Database = z.infer<typeof DatabaseSchema>
 
 export const ConfigSchema = z

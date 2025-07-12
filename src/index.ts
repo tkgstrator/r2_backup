@@ -99,7 +99,7 @@ const remove = async (database: Database): Promise<void> => {
 
 console.info('R2 Backup: Scheduled Task Started')
 for (const database of config.db.databases) {
-  cron.schedule((database.backup_frequency || database.cron_expression) as string, async () => {
+  cron.schedule(database.cron_expression, async () => {
     try {
       await backup(database)
       await upload(database)
