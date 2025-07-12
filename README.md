@@ -2,7 +2,34 @@
 
 PostgreSQLのデータベースを定期的にCloudflare R2にバックアップするためのツールです
 
-## Configuration
+## Development
+
+`.devcontainer/.env.exmaple`の中身を参考に`.devcontainer/.env`を作成します
+
+```zsh
+cp .devcontainer/.env.example .devcontainer/.env
+```
+
+Cloudflareのアカウント情報とR2 User Tokenを設定します
+
+```zsh
+ACCESS_KEY_ID={YOUR_R2_ACCESS_KEY_ID}
+SECRET_ACCESS_KEY={YOUR_R2_SECRET_ACCESS_KEY}
+CLOUDFLARE_ACCOUNT_ID={YOUR_CLOUDFLARE_ACCOUNT_ID}
+POSTGRES_DB=db1
+POSTGRES_HOST=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+
+PGADMIN_DEFAULT_EMAIL=default@postgres.com
+PGADMIN_DEFAULT_PASSWORD=password
+```
+
+以下のデータベース名はダミーデータなので何でも構いません
+
+ここに設定されている`POSTGRES_DB`のデータベースが初期化時に作成されます
+
+## Get Started
 
 `.r2bk.yaml`を作成します
 
@@ -21,7 +48,8 @@ db:
       bucket_name: pg-backup # バックアップ先のバケット名
       retention_period: 3 # リテンション
       retention_unit: minute # リテンション単位
-      cron_expression: "*/1 * * * *" # バックアップ実行間隔
+      cron_expression: "*/1 * * * *" # バックアップ実行間隔 (任意)
+
     # - name: db2
     #   bucket_name: pg-backup
     #   retention_period: 5
@@ -29,7 +57,12 @@ db:
     #   cron_expression: "*/1 * * * *"
 ```
 
-`docker-compose.yaml`を次のような感じで作成します
+`cron_expression`は正しく評価できるcron式であれば何でも構いません
+
+`@daily`などのような式も、多分正しく評価されます
+
+
+`compose.yaml`を次のような感じで作成します
 
 ```yaml
 services:
