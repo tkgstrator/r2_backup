@@ -3,7 +3,7 @@
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
-    "includes": ["**", "!**/src/pages/game", "!**/src/lib/"],
+    "includes": ["**"],
     "rules": {
       "recommended": true,
       "suspicious": {
@@ -13,28 +13,25 @@
       "complexity": {},
       "correctness": {
         "noUnusedImports": "error",
-        "noUnusedVariables": "off",
-        "useExhaustiveDependencies": "off"
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error"
       },
-      "a11y": {
-        "useKeyWithClickEvents": "off"
-      },
+      "a11y": {},
       "security": {}
     }
   },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
-    "includes": ["**", "!**/src/pages/game", "!**/src/lib/"],
+    "includes": ["**"],
     "attributePosition": "auto",
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 80
+    "lineWidth": 120
   },
   "javascript": {
     "formatter": {
-      "enabled": true,
       "arrowParentheses": "always",
       "bracketSameLine": false,
       "bracketSpacing": true,
@@ -42,9 +39,6 @@
       "quoteStyle": "single",
       "quoteProperties": "asNeeded",
       "semicolons": "asNeeded",
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineWidth": 120,
       "trailingCommas": "none"
     }
   },

@@ -56,7 +56,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "$STRAPI_POSTGRES_USER"]
+      test: ["CMD", "pg_isready", "-U", "$POSTGRES_USER"]
       interval: 10s
       timeout: 5s
       retries: 5
