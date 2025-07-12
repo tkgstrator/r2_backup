@@ -2,7 +2,7 @@ ARG BUN_VERSION=1.2.18
 FROM oven/bun:${BUN_VERSION} AS build
 
 WORKDIR /app
-COPY package.json bun.lockb* /app/
+COPY package.json bun.lockb* tsconfig.json /app/
 COPY src /app/src
 RUN bun install --frozen-lockfile --ignore-scripts
 RUN bun run build
