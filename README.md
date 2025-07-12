@@ -72,7 +72,7 @@ db:
 ```yaml
 services:
   r2_backup:
-    image: tkgling/r2_backup:latest
+    image: ghcr.io/tkgstrator/r2_backup:latest-1.2.18
     volumes:
       - ./.r2bk.yaml:/app/.r2bk.yaml:ro
     environment:
