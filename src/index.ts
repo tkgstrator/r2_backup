@@ -39,7 +39,7 @@ const backup = async (database: Database): Promise<void> => {
 }
 
 const upload = async (database: Database): Promise<void> => {
-  const current_time = dayjs().startOf(database.retention_unit)
+  const current_time = dayjs().startOf('minute')
   const content = readFileSync(`${database.name}.sql`)
   await client.send(
     new PutObjectCommand({
