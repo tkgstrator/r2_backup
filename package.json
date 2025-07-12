@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun src/index.ts",
     "start": "bun dist/index.js",
-    "build": "rimraf dist && bun build src/index.ts --outdir dist --target bun"
+    "build": "tsc --noEmit && rimraf dist && bun build src/index.ts --outdir dist --target bun"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.844.0",
