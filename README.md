@@ -48,7 +48,7 @@ db:
       bucket_name: pg-backup # バックアップ先のバケット名
       retention_period: 3 # リテンション
       retention_unit: minute # リテンション単位
-      cron_expression: "*/1 * * * *" # バックアップ実行間隔 (任意)
+      cron_expression: "*/1 * * * *" # バックアップ実行間隔
 
     # - name: db2
     #   bucket_name: pg-backup
