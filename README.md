@@ -104,3 +104,5 @@ services:
       postgres:
         condition: service_healthy
 ```
+
+実行する場合にはこの`compose.yaml`と同じ場所に`.env`または何らかの方法で環境変数を設定してください
