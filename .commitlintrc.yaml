@@ -1,6 +1,15 @@
+---
 extends:
-  - "@commitlint/config-conventional"
+  - '@commitlint/config-conventional'
 rules:
+  header-max-length:
+    - 2
+    - always
+    - 128
+  body-max-line-length:
+    - 2
+    - always
+    - 128
   type-enum:
     - 2
     - always
@@ -10,9 +19,10 @@ rules:
       - docs
       - feat
       - fix
+      - format
       - perf
       - refactor
       - revert
       - style
       - test
-      - format
+      - ui
