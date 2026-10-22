@@ -2,7 +2,7 @@ ARG BUN_VERSION=1.2.18
 FROM oven/bun:${BUN_VERSION} AS build
 
 WORKDIR /app
-COPY package.json bun.lockb* tsconfig.json /app/
+COPY package.json bun.lock tsconfig.json /app/
 COPY src /app/src
 RUN bun install --frozen-lockfile --ignore-scripts
 RUN bun run build
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/var/lib/apt,sharing=locked \
 
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package.json /app/package.json
-COPY --from=build /app/bun.lockb* /app/
+COPY --from=build /app/bun.lock /app/
 RUN bun install --frozen-lockfile --ignore-scripts --production
 
 CMD ["bun", "dist/index.js"]
